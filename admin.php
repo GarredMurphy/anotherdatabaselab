@@ -27,12 +27,21 @@ function userList()
     <head>
         <link href="css/styles.css" rel ="stylesheet" type="text/css" />
         <title> Admin Main Page </title>
+        
+        <script>
+            
+            function confirmDelete(){
+                confirm("Are you sure you want to delete this user?")
+            }
+        </script>
     </head>
     <body>
         <h1> admin main </h1>
         <h1> welcome <?=$_SESSION['adminName']?></h1>
         
-        <a href= "index.php">Log out</a>
+        <form action = "logout.php">
+            <input type="submit" value = "Logout" />
+        </form>
         
         <br/>
         
@@ -48,7 +57,7 @@ function userList()
         {
             echo $user['id'] . " " . $user['firstName'] . " " . $user['lastName'];
             echo "[<a href= 'updateUser.php?userId=". $user['id']. "'> Update </a>]";
-            echo "[<a href= 'deleteUser.php?userId=". $user['id']. "'> Delete </a>] <br />";
+            echo "[<a onclick='return confirmDelete()' href= 'deleteUser.php?userId=". $user['id']. "'> Delete </a>] <br />";
         }
         
         

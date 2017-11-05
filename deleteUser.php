@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <?php
 session_start();
     
@@ -14,8 +14,8 @@ if (!isset($_SESSION['username']))
     include 'database.php';
     $dbConn = getDatabaseConnection();
     
-    if ($_GET['confirmation'] == "confirm")
-    {
+//    if ($_GET['confirmation'] == "confirm")
+//    {
         $sql = "DELETE FROM heroku_e746fa7e355c8e7.user WHERE id = :id";
     
     $np = array();
@@ -24,17 +24,16 @@ if (!isset($_SESSION['username']))
     $statement->execute($np);
     echo "attempting to delete";
     header("Location: admin.php");
-    }
-    if ($_GET['confirmation'] == "go back")
-    {
-    header("Location: admin.php");
-    }
+//    }
+//    if ($_GET['confirmation'] == "go back")
+//    {
+//    header("Location: admin.php");
+//    }
     
 ?>
 
-<body>
-    
-</body>
+<!---
+<!DOCTYPE html>
 
 <html>
     <head>
@@ -49,3 +48,4 @@ if (!isset($_SESSION['username']))
     </form>
     
 </html>
+--->

@@ -31,7 +31,7 @@ function userList()
         <script>
             
             function confirmDelete(){
-                confirm("Are you sure you want to delete this user?")
+                return confirm("Are you sure you want to delete this user?")
             }
         </script>
     </head>

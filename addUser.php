@@ -14,7 +14,7 @@
      }
      
      if (isset($_GET['adduser'])){
-         $sql = "INSERT INTO heroku_e746fa7e355c8e7.departments (firstName, lastName, email, role, deptId) VALUES (:fname, :lName, :email, :role, :deptId)";
+         $sql = "INSERT INTO heroku_e746fa7e355c8e7.user (firstName, lastName, email, role, deptId) VALUES (:fname, :lName, :email, :role, :deptId)";
         $np = array();
         $np[':fname'] = $_GET['firstName']
         $np[':lname'] = $_GET['lastName']

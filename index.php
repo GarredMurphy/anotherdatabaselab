@@ -1,6 +1,8 @@
 
 <!DOCTYPE html>
 <?php
+
+
 session_start();
 function loginProcess() {
     if (isset($_POST['loginForm'])) 
@@ -13,7 +15,7 @@ function loginProcess() {
     
     $username = $_POST['username'];
     $password = sha1($_POST['password']);
-    
+  //  $password = $_POST['password'];
     
     $sql = "SELECT * from heroku_e746fa7e355c8e7.admin WHERE userName = :username AND password = :password";
 //    $sql = "SELECT * from heroku_e746fa7e355c8e7.admin WHERE 1";
@@ -23,89 +25,26 @@ function loginProcess() {
     $statement = $dbConn->prepare($sql);
     
     
-        $statement->execute($named_parameters);
+    
+    $statement->execute($named_parameters);
     
         $record = $statement->fetch();
     //    $record = $statement->fetchALL();
-        if (empty($records)) {
+        if (empty($record)) {
             echo "Wrong username or password <br /> ";
-            //print_r($records);
+            //print_r($record);
         }
         else
         {
-            $_SESSION['username'] = $record['username'];
+            //echo "userName and password correct";
+            $_SESSION['username'] = $record['userName'];
             $_SESSION['adminName'] = $record['firstName'] . " " . $record['lastName'];
             //print_r($record);
             header("Location: admin.php");
         }
      }    
 }
-    /*
-    function displayDeviceList() {
-        
-        
-        $name_parameters = array();
-        
-        if (isset($_GET['submit']))
-        {
-            if (!empty($_GET['device-name']))
-            {
-                $sql .= " AND deviceName LIKE :deviceName";
-                $named_parameters[":deviceName"] = "%" . $_GET['device-name'] . "%";
-                
-            }
-            if (!empty($_GET['device-type']))
-            {
-                $sql .= " AND deviceType = '". $_GET['device-type'] . "'";
-            }
-            
-            if (isset($_GET['available']))
-            {
-                $sql .= " AND status = 'available'";
-            }
-            
-            if (isset($_GET['order-by']))
-            {
-                $sql .= " ORDER BY " .$_GET['order-by'];
-            }
-            else {
-                $sql .= " ORDER BY deviceName";
-            }
-            
-            
-        }
-        
-        
-        $dbConn = getDatabaseConnection();
     
-    
-        
-    
-        $statement = $dbConn->prepare($sql);
-    
-        $statement->execute($named_parameters);
-    
-        $records = $statement->fetchAll();
-    
-        foreach($records as $record) {
-            echo $record["deviceName"]. " ".$record["deviceType"]." ".$record["price"]." ".$record["status"]."<br />";
-        }
-    
-    }
-    
-    function getDeviceTypes()
-    {
-        
-        $dbConn = getDatabaseConnection();
-        $sql = "SELECT DISTINCT(deviceType) from heroku_e746fa7e355c8e7.device";
-        $statement = $dbConn->prepare($sql);
-        $statement->execute();
-        $records = $statement->fetchAll();
-        foreach($records as $record) {
-            echo "<option value ='". $record["deviceType"] . "'>". $record["deviceType"]."</option>";
-        }
-    }
-    */
 ?>
 <html>
     <link href="css/styles.css" rel ="stylesheet" type="text/css" />
